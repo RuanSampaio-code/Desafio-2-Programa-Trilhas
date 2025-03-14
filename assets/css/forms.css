@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+   /*  background-color: rgb(27, 43, 136); */
+}
+
+/* Remove o efeito hover do card principal */
+.card.shadow-sm {
+  transition: none;
+  cursor: default;
+}
+
+/* Altera apenas os cards dentro da seção de trilhas */
+.row.g-3 .card:hover {
+  border-color: #ff4d1c;
+}
+
+.card {
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.form-check-input:checked {
+  background-color: #ff4d1c;
+  border-color: #ff4d1c;
+}
+.form-check-input:focus {
+  border-color: #ff4d1c;
+  box-shadow: 0 0 0 0.25rem rgba(255, 77, 28, 0.25);
+}
+.form-control:focus {
+    border-color: #fd7e14;
+    box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.25);
+  }
+  .form-select:focus {
+    border-color: #fd7e14;
+    box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.25);
+  }
+  .is-invalid {
+    border-color: #dc3545 !important;
+  }
+  .invalid-feedback {
+    display: flex !important;
+    align-items: center;
+  }
+  .invalid-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    margin-right: 5px;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .btn-back {
+    color: #6c757d;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .btn-back:hover {
+    color: #343a40;
+  }

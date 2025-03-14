@@ -10,49 +10,13 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-  <style>
-    
-    .form-control:focus {
-      border-color: #fd7e14;
-      box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.25);
-    }
-    .form-select:focus {
-      border-color: #fd7e14;
-      box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.25);
-    }
-    .is-invalid {
-      border-color: #dc3545 !important;
-    }
-    .invalid-feedback {
-      display: flex !important;
-      align-items: center;
-    }
-    .invalid-icon {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      width: 16px;
-      height: 16px;
-      background-color: #dc3545;
-      color: white;
-      border-radius: 50%;
-      margin-right: 5px;
-      font-size: 10px;
-      font-weight: bold;
-    }
-    .btn-back {
-      color: #6c757d;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-    }
-    .btn-back:hover {
-      color: #343a40;
-    }
-  </style>
+
+  <!-- CSS globak -->
+   <link rel="stylesheet" href="/assets/css/forms.css">
+
 </head>
 <body>
-  <div class="container py-4" >
+  <div class="container py-4" style="max-width: 800px;">
     <div class=" justify-content-center rounded-3 p-4">
       <div class="col-md-10 w-100">
         <!-- Botão Voltar -->
@@ -71,9 +35,9 @@
         <!-- Formulário -->
 
         <!-- Formulário dentro de um Card -->
-        <div class="card shadow-sm border-1">
+        <div class="card shadow-sm border-1 p-3">
             <div class="card-body">
-                <form>
+                <form >
                     <h2 class="fs-5 fw-medium mb-3">Informações do participante</h2>
                     
                     <!-- Nome completo -->
@@ -108,11 +72,8 @@
                     <!-- E-mail -->
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
-                        <input type="email" class="form-control is-invalid" id="email" >
-                        <div class="invalid-feedback">
-                        <span class="invalid-icon">!</span>
-                        Insira um e-mail válido
-                        </div>
+                        <input type="email" class="form-control " id="email" >
+                        
                     </div>
                     
                     <!-- Telefone -->
@@ -183,6 +144,115 @@
                             <input type="file" class="d-none" id="comprovante">
                         </div>
                         </div>
+                    </div>
+                    
+                    <!-- Trilhas de Aprendizagem -->
+                    <div class="mb-4">
+                        <h2 class="fs-5 fw-medium mb-2">Trilhas de apredizagem</h2>
+                        <p class="text-secondary mb-3">Selecione apenas uma trilha</p>
+                    
+                        <div class="row g-3">
+                        <!-- Card Programação Front-end -->
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                            <div class="card-body">
+                                <div class="form-check d-flex align-items-center gap-3">
+                                <input class="form-check-input" type="radio" name="trilha" id="frontend" checked>
+                                <label class="form-check-label w-100" for="frontend">
+                                    <div class="text-center">
+                                    <i class="bi bi-code-square fs-4 mb-2"></i>
+                                    <p class="mb-0">Programação Front-end</p>
+                                    </div>
+                                </label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Card Programação Back-end -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                            <div class="card-body">
+                                <div class="form-check d-flex align-items-center gap-3">
+                                <input class="form-check-input" type="radio" name="trilha" id="backend">
+                                <label class="form-check-label w-100" for="backend">
+                                    <div class="text-center">
+                                    <i class="bi bi-terminal fs-4 mb-2"></i>
+                                    <p class="mb-0">Programação Back-end</p>
+                                    </div>
+                                </label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Card Programação de Jogos -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                            <div class="card-body">
+                                <div class="form-check d-flex align-items-center gap-3">
+                                <input class="form-check-input" type="radio" name="trilha" id="jogos">
+                                <label class="form-check-label w-100" for="jogos">
+                                    <div class="text-center">
+                                    <i class="bi bi-controller fs-4 mb-2"></i>
+                                    <p class="mb-0">Programação de Jogos</p>
+                                    </div>
+                                </label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Card Design e Experiência -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                            <div class="card-body">
+                                <div class="form-check d-flex align-items-center gap-3">
+                                <input class="form-check-input" type="radio" name="trilha" id="design">
+                                <label class="form-check-label w-100" for="design">
+                                    <div class="text-center">
+                                    <i class="bi bi-palette fs-4 mb-2"></i>
+                                    <p class="mb-0">Design e Experiência</p>
+                                    </div>
+                                </label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Card Ciência de Dados -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                            <div class="card-body">
+                                <div class="form-check d-flex align-items-center gap-3">
+                                <input class="form-check-input" type="radio" name="trilha" id="dados">
+                                <label class="form-check-label w-100" for="dados">
+                                    <div class="text-center">
+                                    <i class="bi bi-graph-up fs-4 mb-2"></i>
+                                    <p class="mb-0">Ciência de Dados</p>
+                                    </div>
+                                </label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Termos e Condições -->
+                    <div class="mb-4">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="termos">
+                        <label class="form-check-label" for="termos">
+                            Declaro que li e concordo com os <a href="#" style="color: #ff4d1c; text-decoration: none;">Termos e Condições</a> e com a <a href="#" style="color: #ff4d1c; text-decoration: none;">Política de Privacidade</a>.
+                        </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Botões -->
+                    <div class="d-flex gap-3 justify-content-end">
+                        <button type="button" class="btn btn-outline-secondary px-4">Cancelar</button>
+                        <button type="submit" class="btn px-4" style="background-color: #ff4d1c; color: white;">Fazer inscrição</button>
                     </div>
                 </form>
 
