@@ -6,10 +6,18 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+<div class="position-absolute top-0 end-0 p-3">
+    <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider round"></span>
+    </label>
+</div>
 <body class="d-flex vh-100 align-items-center justify-content-center text-center">
 
-    <div class="container">
+    <div class="container position-relative">
+        
         <div class="row justify-content-center">
             <div class="col-md-6 d-flex flex-column align-items-center">
                 <img src="assets/images/Ilustration.png" alt="Imagem de Apresentação" class="img-fluid mb-3">
@@ -20,5 +28,12 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const toggleSwitch = document.getElementById('darkModeToggle');
+        toggleSwitch.addEventListener('change', () => {
+            console.log('Switch toggled');
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
