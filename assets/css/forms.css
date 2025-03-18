@@ -4,6 +4,7 @@
     width: 102px;
     height: 34px;
     margin-right: 10px; /* Espaçamento entre o switch e o seletor de linguagem */
+    vertical-align: middle; /* Alinha verticalmente com o seletor de linguagem */
 }
 
 .switch input {
