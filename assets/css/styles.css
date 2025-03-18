@@ -4,7 +4,6 @@
     width: 102px;
     height: 34px;
     margin-right: 10px; /* Espaçamento entre o switch e o seletor de linguagem */
-    vertical-align: middle; /* Alinha verticalmente com o seletor de linguagem */
 }
 
 .switch input {
@@ -32,7 +31,7 @@
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     transition: .4s;
     border-radius: 50%;
 }
@@ -56,6 +55,16 @@ body.dark-mode {
     gap: 10px; /* Espaçamento entre os elementos */
 }
 
-.mb-4{
-    color: rgb(0, 0, 0);
+.welcome-message {
+    color:#ffffff;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
