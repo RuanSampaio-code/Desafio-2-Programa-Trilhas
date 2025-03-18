@@ -336,6 +336,39 @@
         element.textContent = translations[selectedLanguage][translationKey];
       });
     });
+    
   </script>
+    <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      
+      // Verifique se todos os campos obrigatórios estão preenchidos
+      const nome = document.getElementById('nome').value;
+      const dataNascimento = document.getElementById('dataNascimento').value;
+      const cpf = document.getElementById('cpf').value;
+      const email = document.getElementById('email').value;
+      const telefone = document.getElementById('telefone').value;
+      const termos = document.getElementById('termos').checked;
+  
+      if (nome && dataNascimento && cpf && email && telefone && termos) {
+        // Redirecione para a página de sucesso
+        window.location.href = 'success.html';
+      } else {
+        alert('Por favor, preencha todos os campos obrigatórios e aceite os termos e condições.');
+      }
+    });
+  
+    const languageSelection = document.getElementById('languageSelect');
+    languageSelect.addEventListener('change', (event) => {
+      const selectedLanguage = event.target.value;
+      const elementsToTranslate = document.querySelectorAll('[data-translate]');
+      elementsToTranslate.forEach(element => {
+        const translationKey = element.getAttribute('data-translate');
+        element.textContent = translations[selectedLanguage][translationKey];
+      });
+    });
+  </script>
+  
 </body>
 </html>
