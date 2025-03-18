@@ -1,8 +1,9 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
+    width: 102px;
     height: 34px;
+    margin-right: 10px; /* Espaçamento entre o switch e o seletor de linguagem */
 }
 
 .switch input {
@@ -30,7 +31,7 @@
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     transition: .4s;
     border-radius: 50%;
 }
@@ -46,4 +47,10 @@ input:checked + .slider:before {
 body.dark-mode {
     background-color: #121212;
     color: #ffffff;
+}
+
+.top-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre os elementos */
 }
