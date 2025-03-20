@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const translations = {
         en: {
-            welcomeMessage: "Welcome to the technology training program of the Government of Maranhão! An initiative of SECTI in partnership with FAPEMA to train young people and adults in the field of technology.",
+            welcomeMessage: "Welcome to the Trilhas program, an initiative by SECTI and FAPEMA to train young people and adults in the technology field.",
             startRegistration: "Start Registration"
         },
         pt: {
-            welcomeMessage: "Bem-vindo ao programa de formação em tecnologia do Governo do Maranhão! Uma iniciativa da SECTI em parceria com a FAPEMA para capacitar jovens e adultos na área de tecnologia.",
+            welcomeMessage: "Bem-vindo ao programa Trilhas, uma iniciativa da SECTI e FAPEMA para capacitar jovens e adultos na área de tecnologia.",
             startRegistration: "Iniciar Inscrição"
         }
     };
