@@ -72,6 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  /* Bottees de darkmode e mudançar de idioma */
+
+  /* Dark mode */
   const toggleSwitch = document.getElementById('darkModeToggle');
   const currentMode = localStorage.getItem('darkMode');
 
@@ -90,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  /* Mudança de idioma */
   const languageSelect = document.getElementById('languageSelect');
   languageSelect.addEventListener('change', (event) => {
     const selectedLanguage = event.target.value;
