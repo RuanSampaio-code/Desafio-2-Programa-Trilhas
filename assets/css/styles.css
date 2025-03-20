@@ -50,6 +50,7 @@ body.dark-mode {
 }
 
 .top-right-controls {
+    z-index: 9999; 
     display: flex;
     align-items: center;
     gap: 10px; /* Espaçamento entre os elementos */
