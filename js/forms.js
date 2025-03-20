@@ -1,4 +1,5 @@
-const translations = {
+document.addEventListener('DOMContentLoaded', () => {
+  const translations = {
     en: {
       backButton: "Back",
       formTitle: "Registration Form",
@@ -72,8 +73,21 @@ const translations = {
   };
 
   const toggleSwitch = document.getElementById('darkModeToggle');
+  const currentMode = localStorage.getItem('darkMode');
+
+  if (currentMode === 'enabled') {
+    document.body.classList.add('dark-mode');
+    toggleSwitch.checked = true;
+  }
+
   toggleSwitch.addEventListener('change', () => {
-      document.body.classList.toggle('dark-mode');
+    if (toggleSwitch.checked) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'disabled');
+    }
   });
 
   const languageSelect = document.getElementById('languageSelect');
@@ -85,8 +99,13 @@ const translations = {
       element.textContent = translations[selectedLanguage][translationKey];
     });
   });
-  
 
+  const initialLanguage = languageSelect.value;
+  const elementsToTranslate = document.querySelectorAll('[data-translate]');
+  elementsToTranslate.forEach(element => {
+    const translationKey = element.getAttribute('data-translate');
+    element.textContent = translations[initialLanguage][translationKey];
+  });
 
   const form = document.querySelector('form');
   form.addEventListener('submit', (event) => {
@@ -107,13 +126,4 @@ const translations = {
       alert('Por favor, preencha todos os campos obrigatórios e aceite os termos e condições.');
     }
   });
-
-  const languageSelection = document.getElementById('languageSelect');
-  languageSelect.addEventListener('change', (event) => {
-    const selectedLanguage = event.target.value;
-    const elementsToTranslate = document.querySelectorAll('[data-translate]');
-    elementsToTranslate.forEach(element => {
-      const translationKey = element.getAttribute('data-translate');
-      element.textContent = translations[selectedLanguage][translationKey];
-    });
-  });
+});
