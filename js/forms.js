@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  //Controle de varaiáveis de idiomas
   const translations = {
     en: {
       backButton: "Back",
@@ -71,63 +72,60 @@ document.addEventListener('DOMContentLoaded', () => {
       submit: "Fazer inscrição"
     }
   };
+  //Inicilizas as funções
+  functionDarkMode();
+  functionLanguageSelector(translations);
+  functionFormValidation();
+});
 
-  /* Bottees de darkmode e mudançar de idioma */
-
-  /* Dark mode */
+//Função para ativar o modo escuro
+function functionDarkMode() {
   const toggleSwitch = document.getElementById('darkModeToggle');
   const currentMode = localStorage.getItem('darkMode');
-
+  
   if (currentMode === 'enabled') {
-    document.body.classList.add('dark-mode');
-    toggleSwitch.checked = true;
+      document.body.classList.add('dark-mode');
+      toggleSwitch.checked = true;
   }
 
   toggleSwitch.addEventListener('change', () => {
-    if (toggleSwitch.checked) {
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('darkMode', 'enabled');
-    } else {
-      document.body.classList.remove('dark-mode');
-      localStorage.setItem('darkMode', 'disabled');
-    }
+      document.body.classList.toggle('dark-mode', toggleSwitch.checked);
+      localStorage.setItem('darkMode', toggleSwitch.checked ? 'enabled' : 'disabled');
   });
+}
 
-  /* Mudança de idioma */
+//Função para selecionar o idioma
+function functionLanguageSelector(translations) {
   const languageSelect = document.getElementById('languageSelect');
   languageSelect.addEventListener('change', (event) => {
-    const selectedLanguage = event.target.value;
-    const elementsToTranslate = document.querySelectorAll('[data-translate]');
-    elementsToTranslate.forEach(element => {
-      const translationKey = element.getAttribute('data-translate');
-      element.textContent = translations[selectedLanguage][translationKey];
-    });
+      updateTranslations(event.target.value, translations);
   });
+  updateTranslations(languageSelect.value, translations);
+}
 
-  const initialLanguage = languageSelect.value;
-  const elementsToTranslate = document.querySelectorAll('[data-translate]');
-  elementsToTranslate.forEach(element => {
-    const translationKey = element.getAttribute('data-translate');
-    element.textContent = translations[initialLanguage][translationKey];
+//Função para atualizar as traduções
+function updateTranslations(language, translations) {
+  document.querySelectorAll('[data-translate]').forEach(element => {
+      const key = element.getAttribute('data-translate');
+      element.textContent = translations[language][key];
   });
+}
 
-  const form = document.querySelector('form');
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    
-    // Verifique se todos os campos obrigatórios estão preenchidos
-    const nome = document.getElementById('nome').value;
-    const dataNascimento = document.getElementById('dataNascimento').value;
-    const cpf = document.getElementById('cpf').value;
-    const email = document.getElementById('email').value;
-    const telefone = document.getElementById('telefone').value;
-    const termos = document.getElementById('termos').checked;
+//Função para validar o formulário
+function functionFormValidation() {
+  document.querySelector('form').addEventListener('submit', (event) => {
+      event.preventDefault();
 
-    if (nome && dataNascimento && cpf && email && telefone && termos) {
-      // Redirecione para a página de sucesso
-      window.location.href = 'success.html';
-    } else {
-      alert('Por favor, preencha todos os campos obrigatórios e aceite os termos e condições.');
-    }
+      const requiredFields = ['nome', 'dataNascimento', 'cpf', 'email', 'telefone'];
+      const allFilled = requiredFields.every(id => document.getElementById(id).value.trim() !== '');
+      const termsAccepted = document.getElementById('termos').checked;
+
+      if (allFilled && termsAccepted) {
+          window.location.href = 'success.html';
+      } else {
+          alert('Por favor, preencha todos os campos obrigatórios e aceite os termos e condições.');
+      }
   });
-});
+}
+
+
