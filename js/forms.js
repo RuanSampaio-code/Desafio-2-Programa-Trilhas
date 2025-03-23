@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
       dataScience: "Data Science",
       termsConditions: "I declare that I have read and agree with the Terms and Conditions and the Privacy Policy.",
       cancel: "Cancel",
-      submit: "Submit"
+      submit: "Submit",
+      zipCodeError: "Invalid ZIP Code",
+      zipCodeFeedback: "Please enter a valid ZIP Code"
     },
     pt: {
       backButton: "Voltar",
@@ -69,7 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
       dataScience: "Ciência de Dados",
       termsConditions: "Declaro que li e concordo com os Termos e Condições e com a Política de Privacidade.",
       cancel: "Cancelar",
-      submit: "Fazer inscrição"
+      submit: "Fazer inscrição",
+      zipCodeError: "CEP inválido",
+      zipCodeFeedback: "Por favor, insira um CEP válido"
     }
   };
   //Inicilizas as funções
@@ -111,21 +115,141 @@ function updateTranslations(language, translations) {
   });
 }
 
-//Função para validar o formulário
+//Função para validar o formulário// Função para validar o formulário
+// Função para validar o formulário
 function functionFormValidation() {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex para validar e-mail
+
   document.querySelector('form').addEventListener('submit', (event) => {
       event.preventDefault();
 
-      const requiredFields = ['nome', 'dataNascimento', 'cpf', 'email', 'telefone'];
-      const allFilled = requiredFields.every(id => document.getElementById(id).value.trim() !== '');
-      const termsAccepted = document.getElementById('termos').checked;
+      const requiredFields = [
+          { id: 'nome', label: 'Nome completo' },
+          { id: 'dataNascimento', label: 'Data de nascimento' },
+          { id: 'cpf', label: 'CPF' },
+          { id: 'email', label: 'E-mail' },
+          { id: 'telefone', label: 'Telefone' },
+          { id: 'sexo', label: 'Sexo' },
+          { id: 'documento', label: 'Documento de identidade', type: 'file' },
+          { id: 'cep', label: 'CEP' },
+          { id: 'rua', label: 'Rua' },
+          { id: 'cidade', label: 'Cidade' },
+          { id: 'estado', label: 'Estado' },
+          { id: 'comprovante', label: 'Comprovante de residência', type: 'file' } 
+      ];
 
-      if (allFilled && termsAccepted) {
-          window.location.href = 'success.html';
-      } else {
-          alert('Por favor, preencha todos os campos obrigatórios e aceite os termos e condições.');
+      let missingFields = [];
+      let invalidEmail = false;
+
+      requiredFields.forEach(field => {
+          const input = document.getElementById(field.id);
+          const value = input.value.trim();
+          
+          // Validação geral dos campos obrigatórios
+          if (value === '') {
+              missingFields.push(`<li>${field.label}</li>`);
+              input.classList.add('is-invalid');
+          } else {
+              input.classList.remove('is-invalid');
+          }
+
+          // Validação específica para e-mail
+          if (field.id === 'email' && value !== '') {
+              if (!emailRegex.test(value)) {
+                  invalidEmail = true;
+                  input.classList.add('is-invalid');
+              }
+          }
+      });
+
+      // Validação dos termos
+      const termsAccepted = document.getElementById('termos').checked;
+      const termsError = !termsAccepted ? '<li>Aceite os termos e condições</li>' : '';
+
+      // Montagem da mensagem de erro
+      let errorMessage = '';
+      if (missingFields.length > 0 || invalidEmail || !termsAccepted) {
+          errorMessage += '<ul>';
+          
+          if (missingFields.length > 0) {
+              errorMessage += `<p>Campos obrigatórios não preenchidos:</p>${missingFields.join('')}`;
+          }
+          
+          if (invalidEmail) {
+              errorMessage += '<li>E-mail inválido</li>';
+              document.getElementById('email').classList.add('is-invalid');
+          }
+          
+          if (termsError) {
+              errorMessage += termsError;
+          }
+          
+          errorMessage += '</ul>';
       }
+
+      // Exibe o modal com os erros ou redireciona
+      if (errorMessage) {
+          document.getElementById('modalBody').innerHTML = errorMessage;
+          new bootstrap.Modal(document.getElementById('errorModal')).show();
+      } else {
+          window.location.href = 'success.html';
+      }
+  });
+
+  // Remove a validação quando o usuário digitar
+  document.querySelectorAll("input, select").forEach((input) => {
+      input.addEventListener("input", () => {
+          input.classList.remove("is-invalid");
+          // Validação em tempo real para e-mail
+          if (input.id === 'email' && input.value.trim() !== '') {
+              if (!emailRegex.test(input.value)) {
+                  input.classList.add('is-invalid');
+              }
+          }
+      });
   });
 }
 
 
+
+// Função para buscar o CEP
+function buscarCEP() {
+  const cepInput = document.getElementById('cep');
+  const cep = cepInput.value.replace(/\D/g, '');
+  
+  if (cep.length !== 8) return;
+  
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then(response => response.json())
+      .then(data => {
+          if (data.erro) {
+              throw new Error('CEP não encontrado');
+          }
+          
+          // Preenche os campos
+          document.getElementById('rua').value = data.logradouro;
+          document.getElementById('cidade').value = data.localidade;
+          document.getElementById('estado').value = data.uf;
+          
+          // Remove a classe de erro se tiver
+          cepInput.classList.remove('is-invalid');
+      })
+      .catch(error => {
+          console.error(error);
+          cepInput.classList.add('is-invalid');
+          mostrarErroCEP();
+      });
+}
+
+// Função para mostrar erro no modal
+function mostrarErroCEP() {
+  const modalBody = document.getElementById('modalBody');
+  modalBody.innerHTML = `
+      <p>CEP não encontrado ou inválido!</p>
+      <p>Verifique o número digitado e tente novamente.</p>
+  `;
+  new bootstrap.Modal(document.getElementById('errorModal')).show();
+}
+
+// Adicione este event listener no DOMContentLoaded
+document.getElementById('cep').addEventListener('blur', buscarCEP);

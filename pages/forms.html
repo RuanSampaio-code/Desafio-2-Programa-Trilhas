@@ -68,12 +68,14 @@
               <div class="mb-3">
                 <label for="sexo" class="form-label" data-translate="gender">Sexo</label>
                 <select class="form-select" id="sexo">
-                  <option value="Feminino" selected data-translate="female">Feminino</option>
-                  <option value="Masculino" data-translate="male">Masculino</option>
-                  <option value="Outro" data-translate="other">Outro</option>
-                  <option value="Prefiro não informar" data-translate="preferNotToSay">Prefiro não informar</option>
+                    <option value="" selected disabled>Selecione...</option>
+                    <option value="Feminino" data-translate="female">Feminino</option>
+                    <option value="Masculino" data-translate="male">Masculino</option>
+                    <option value="Outro" data-translate="other">Outro</option>
+                    <option value="Prefiro não informar" data-translate="preferNotToSay">Prefiro não informar</option>
                 </select>
-              </div>
+            </div>
+            
               <!-- E-mail -->
               <div class="mb-3">
                 <label for="email" class="form-label" data-translate="email">E-mail</label>
@@ -103,7 +105,10 @@
                 <!-- CEP -->
                 <div class="mb-3">
                   <label for="cep" class="form-label" data-translate="zipCode">CEP</label>
-                  <input type="text" class="form-control" id="cep">
+                  <input type="text" class="form-control" id="cep" placeholder="00000-000">
+                  <div class="invalid-feedback">
+                      Por favor, insira um CEP válido
+                  </div>
                 </div>
                 <!-- Rua e Número na mesma linha -->
                 <div class="row mb-3">
@@ -151,7 +156,7 @@
                     <div class="card h-100">
                       <div class="card-body">
                         <div class="form-check d-flex align-items-center gap-3">
-                          <input class="form-check-input" type="radio" name="trilha" id="frontend" checked>
+                          <input class="form-check-input" type="radio" name="trilha" id="frontend">
                           <label class="form-check-label w-100" for="frontend">
                             <div class="text-center">
                               <i class="bi bi-code-square fs-4 mb-2"></i>
@@ -248,6 +253,24 @@
       </div>
     </div>
   </div>
+  <!-- Modal de Erro -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Erro no preenchimento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Aqui os erros serão inseridos dinamicamente -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <!-- Bootstrap JS (opcional, apenas se você precisar de componentes interativos do Bootstrap) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

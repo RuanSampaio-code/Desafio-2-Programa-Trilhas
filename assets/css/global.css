@@ -2,7 +2,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: rgb(27, 43, 136);
+    background-color: rgb(27, 43, 136); 
+    /* background: linear-gradient(to right, #ff4d1c, rgb(27, 43, 136)); */
 }
 
 
